@@ -5,15 +5,15 @@ const bodyParser = require('body-parser');
 // const morgan = require('morgan');
 const userRoutes = require('./routes/userRoutes');
 mongoose.connect('mongodb+srv://joravkumar:18199600Jk@@bg-db-cluster-mvrbg.mongodb.net/test?retryWrites=true', {
-    useNewUrlParser: true
-})
-.then(_ => {
-    console.log('Connection Established Successfully');
-})
-.catch(err => {
-    console.log(err)
-    console.log('Error While Establishing Connection');
-});
+        useNewUrlParser: true
+    })
+    .then(_ => {
+        console.log('Connection Established Successfully');
+    })
+    .catch(err => {
+        console.log(err)
+        console.log('Error While Establishing Connection');
+    });
 
 app.use((req, res, next) => {
     res.setHeader("Access-Control-Allow-Origin", "*");
@@ -43,4 +43,6 @@ app.use((error, req, res, next) => {
 })
 
 const PORT = process.env.PORT || 3001;
-app.listen(PORT);
+app.listen(PORT, _ => {
+    console.log(`server is running on ${PORT}`)
+});
