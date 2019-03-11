@@ -103,3 +103,133 @@ exports.deleteDonor = (req, res) => {
             })
     }
 }
+
+exports.bloodInfo = (req, res) => {
+    let aPositive = 0,
+        aNegative = 0,
+        bPositive = 0,
+        bNegative = 0,
+        oPositive = 0,
+        oNegative = 0,
+        abPositive = 0,
+        abNegative = 0;
+    Donor.find()
+        .then(donor => {
+            donor.forEach(v => {
+                switch (v.bloodGroup) {
+                    case 'A+':
+                        aPositive++
+                        break;
+                    case 'A-':
+                        aNegative++
+                        break;
+                    case 'B+':
+                        bPositive++
+                        break;
+                    case 'B-':
+                        bNegative++
+                        break;
+                    case 'O+':
+                        oPositive++
+                        break;
+                    case 'O-':
+                        oNegative++
+                        break;
+                    case 'AB+':
+                        abPositive++
+                        break;
+                    case 'AB-':
+                        abNegative++
+                        break;
+
+                    default:
+                        break;
+                }
+            });
+            res.status(200).json({
+                success: true,
+                msg: 'Blood info received',
+                totalDonors: donor.length,
+                aPositive,
+                aNegative,
+                bPositive,
+                bNegative,
+                oPositive,
+                oNegative,
+                abPositive,
+                abNegative
+            });
+        })
+        .catch(error => {
+            res.status(422).json({
+                success: false,
+                msg: 'Error while receiving blood info',
+                error
+            })
+        });
+}
+
+exports.donorBloodInfo = (req, res) => {
+    let aPositive = [],
+        aNegative = [],
+        bPositive = [],
+        bNegative = [],
+        oPositive = [],
+        oNegative = [],
+        abPositive = [],
+        abNegative = [];
+    Donor.find()
+        .then(donor => {
+            donor.forEach(v => {
+                switch (v.bloodGroup) {
+                    case 'A+':
+                        aPositive.push(v);
+                        break;
+                    case 'A-':
+                        aNegative.push(v);
+                        break;
+                    case 'B+':
+                        bPositive.push(v);
+                        break;
+                    case 'B-':
+                        bNegative.push(v);
+                        break;
+                    case 'O+':
+                        oPositive.push(v);
+                        break;
+                    case 'O-':
+                        oNegative.push(v);
+                        break;
+                    case 'AB+':
+                        abPositive.push(v);
+                        break;
+                    case 'AB-':
+                        abNegative.push(v);
+                        break;
+
+                    default:
+                        break;
+                }
+            });
+
+            res.status(200).json({
+                success: true,
+                msg: 'Donor blood info received',
+                aPositive,
+                aNegative,
+                bPositive,
+                bNegative,
+                oPositive,
+                oNegative,
+                abPositive,
+                abPositive
+            });
+        })
+        .catch(error => {
+            res.status(422).json({
+                success: false,
+                msg: 'Error while receiving donor blood info',
+                error
+            })
+        })
+}

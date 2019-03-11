@@ -25,9 +25,16 @@ const donorSchema = mongoose.Schema({
         required: true,
         enum: ['male', 'female']
     },
+    country: {
+        type: String,
+        required: [true, 'Country is required']
+    },
     disease: {
         type: String,
         default: "none"
+    },
+    lastTimeDonate: {
+        type: String
     }
 }, {
     timestamps: true
