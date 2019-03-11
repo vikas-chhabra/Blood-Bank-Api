@@ -3,7 +3,7 @@ const app = express.Router();
 const bloodBankController = require('../controller/bloodBankController');
 
 app.get('', bloodBankController.getAllBloodBankInfo);
-app.put('/:bloodBankId', bloodBankController.getBloodBankInfo);
+app.get('/:bloodBankId', bloodBankController.getBloodBankInfo);
 app.post('', bloodBankController.saveBloodBankInfo);
 app.put('/:bloodBankId', bloodBankController.updateBloodBankInfo);
 app.delete('/:bloodBankId', bloodBankController.deleteBloodBankInfo);
