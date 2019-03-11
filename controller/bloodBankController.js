@@ -108,3 +108,35 @@ exports.deleteBloodBankInfo = (req, res) => {
             })
     }
 }
+
+exports.getBloodBankFilter = (req, res) => {
+    if (!req.params.state) {
+        res.status(422).json({
+            success: false,
+            msg: 'State is required'
+        })
+    } else {
+        let state = req.params.state.toLowerCase();
+        let filteredBloodBanks = [];
+        BloodBank.find()
+            .then(bloodBanks => {
+                bloodBanks.forEach(v => {
+                    if (v.state.toLowerCase().includes(state)) {
+                        filteredBloodBanks.push(v);
+                    }
+                });
+                if (filteredBloodBanks.length > 0) {
+                    res.status(200).json({
+                        success: true,
+                        msg: 'Filtered Data Found',
+                        filteredBloodBanks
+                    });
+                } else {
+                    res.status(422).json({
+                        success: false,
+                        msg: 'Filtered Data Not Found',
+                    });
+                }
+            })
+    }
+}
