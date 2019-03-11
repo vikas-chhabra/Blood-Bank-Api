@@ -222,7 +222,7 @@ exports.donorBloodInfo = (req, res) => {
                 oPositive,
                 oNegative,
                 abPositive,
-                abPositive
+                abNegative
             });
         })
         .catch(error => {
