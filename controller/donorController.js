@@ -113,6 +113,15 @@ exports.bloodInfo = (req, res) => {
         oNegative = 0,
         abPositive = 0,
         abNegative = 0;
+    var lastUpdated;
+    Donor.findOne({}, {}, {
+        sort: {
+            'created_at': -1
+        }
+    }).then(donor => {
+        let currentDate = new Date();
+        lastUpdated = currentDate - donor.updatedAt.getHours();
+    })
     Donor.find()
         .then(donor => {
             donor.forEach(v => {
@@ -157,7 +166,8 @@ exports.bloodInfo = (req, res) => {
                 oPositive,
                 oNegative,
                 abPositive,
-                abNegative
+                abNegative,
+                lastUpdated
             });
         })
         .catch(error => {
