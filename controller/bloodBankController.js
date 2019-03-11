@@ -1,6 +1,6 @@
 const BloodBank = require('../models/BloodBank');
 
-exports.getBloodBankInfo = (req, res) => {
+exports.getAllBloodBankInfo = (req, res) => {
     BloodBank.find()
         .then(bloodBanks => {
             res.status(200).json({
@@ -16,6 +16,31 @@ exports.getBloodBankInfo = (req, res) => {
                 error
             });
         })
+}
+
+exports.getBloodBankInfo = (req, res) => {
+    if (!req.params.bloodBankId) {
+        res.status(422).json({
+            success: false,
+            msg: 'Blood bank id is required'
+        })
+    } else {
+        BloodBank.findById(req.params.bloodBankId)
+            .then(bloodBank => {
+                res.status(200).json({
+                    success: true,
+                    msg: 'Blood bank received',
+                    bloodBank
+                })
+            })
+            .catch(error => {
+                res.status(200).json({
+                    success: false,
+                    msg: 'Error while receiving blood bank',
+                    error
+                });
+            })
+    }
 }
 
 exports.saveBloodBankInfo = (req, res) => {
