@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 // const morgan = require('morgan');
 const userRoutes = require('./routes/userRoutes');
+const bloodBankRoutes = require('./routes/bloodBankRoutes');
 const donorRoutes = require('./routes/donorRoutes');
 mongoose.connect('mongodb+srv://joravkumar:18199600Jk@@bg-db-cluster-mvrbg.mongodb.net/test?retryWrites=true', {
         useNewUrlParser: true
@@ -29,6 +30,7 @@ app.use(bodyParser.urlencoded({
 }));
 
 app.use('/api/users', userRoutes);
+app.use('/api/bloodBanks', bloodBankRoutes);
 app.use('/api/donors', donorRoutes);
 
 app.use((req, res, next) => {

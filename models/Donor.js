@@ -29,6 +29,10 @@ const donorSchema = mongoose.Schema({
         type: String,
         required: [true, 'Country is required']
     },
+    state: {
+        type: String,
+        required: [true, 'State is required']
+    },
     disease: {
         type: String,
         default: "none"
