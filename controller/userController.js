@@ -78,7 +78,7 @@ exports.signUp = (req, res) => {
 
 exports.login = (req, res) => {
     User.findOne({
-            email: req.body.email
+            email: req.body.email,
         })
         .then(user => {
             if (user.length > 1) {
@@ -86,7 +86,7 @@ exports.login = (req, res) => {
                     success: false,
                     msg: 'Auth failed'
                 });
-            } else {
+            } else if (user.active) {
                 bcrypt.compare(req.body.password, user.password, function (error, result) {
                     if (error) {
                         return res.status(401).json({
@@ -112,6 +112,11 @@ exports.login = (req, res) => {
                             msg: 'Auth failed',
                         })
                     }
+                })
+            } else {
+                res.status(401).json({
+                    success: false,
+                    msg: 'You have been blocked',
                 })
             }
         })
