@@ -132,7 +132,9 @@ exports.delete = (req, res) => {
                     msg: 'Auth failed'
                 });
             } else {
-                User.findByIdAndUpdate(req.params.userId, req.body)
+                User.findByIdAndUpdate(req.params.userId, {
+                        active: !user.active
+                    })
                     .then(_ => {
                         res.status(200).json({
                             success: true,
