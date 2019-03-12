@@ -124,9 +124,7 @@ exports.login = (req, res) => {
 }
 
 exports.delete = (req, res) => {
-    User.findOne({
-            email: req.body.email
-        })
+    User.findById(req.params.userId)
         .then(user => {
             if (user.length > 1) {
                 return res.status(401).json({
