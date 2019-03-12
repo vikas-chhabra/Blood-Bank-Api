@@ -122,3 +122,37 @@ exports.login = (req, res) => {
             })
         })
 }
+
+exports.delete = (req, res) => {
+    User.findOne({
+            email: req.body.email
+        })
+        .then(user => {
+            if (user.length > 1) {
+                return res.status(401).json({
+                    success: false,
+                    msg: 'Auth failed'
+                });
+            } else {
+                User.findByIdAndUpdate(req.params.userId, req.body)
+                    .then(_ => {
+                        res.status(200).json({
+                            success: true,
+                            msg: 'User Inactive'
+                        });
+                    }).catch(_ => {
+                        res.status(401).json({
+                            success: false,
+                            msg: 'User not Found'
+                        })
+                    })
+
+            }
+        })
+        .catch(_ => {
+            res.status(401).json({
+                success: false,
+                msg: 'Auth failed'
+            })
+        })
+}
