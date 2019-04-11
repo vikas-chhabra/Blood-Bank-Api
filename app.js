@@ -6,16 +6,12 @@ const bodyParser = require('body-parser');
 const userRoutes = require('./routes/userRoutes');
 const bloodBankRoutes = require('./routes/bloodBankRoutes');
 const donorRoutes = require('./routes/donorRoutes');
-mongoose.connect('mongodb+srv://joravkumar:18199600Jk@@bg-db-cluster-mvrbg.mongodb.net/test?retryWrites=true', {
+mongoose.connect('mongodb://localhost:27017/hackathon_api', {
         useNewUrlParser: true
     })
-    .then(_ => {
-        console.log('Connection Established Successfully');
-    })
-    .catch(err => {
-        console.log(err)
-        console.log('Error While Establishing Connection');
-    });
+    .then(_ => console.log('Connection establishing with Mongo db successfully'))
+    .catch(_ => console.log('Error while establishing connection with Mongo db'));
+
 
 app.use((req, res, next) => {
     res.setHeader("Access-Control-Allow-Origin", "*");
