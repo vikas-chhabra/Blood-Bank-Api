@@ -6,7 +6,7 @@ const bodyParser = require('body-parser');
 const userRoutes = require('./routes/userRoutes');
 const bloodBankRoutes = require('./routes/bloodBankRoutes');
 const donorRoutes = require('./routes/donorRoutes');
-mongoose.connect('mongodb://localhost:27017/hackathon_api', {
+mongoose.connect('mongodb+srv://joravkumar:18199600Jk@@bg-db-cluster-mvrbg.mongodb.net/test?retryWrites=true', {
         useNewUrlParser: true
     })
     .then(_ => console.log('Connection establishing with Mongo db successfully'))
