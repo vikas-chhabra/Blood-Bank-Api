@@ -23,7 +23,7 @@ exports.getAll = (req, res) => {
 exports.signUp = (req, res) => {
     if (req.body.email) {
         User.find({
-                email: req.body.email
+                email: req.body.email.trim()
             })
             .then(user => {
                 if (user.length >= 1) {
@@ -41,7 +41,7 @@ exports.signUp = (req, res) => {
                         } else {
                             const user = new User({
                                 userName: req.body.userName,
-                                email: req.body.email,
+                                email: req.body.email.trim(),
                                 password: hash
                             });
                             user.save()
@@ -78,7 +78,7 @@ exports.signUp = (req, res) => {
 
 exports.login = (req, res) => {
     User.findOne({
-            email: req.body.email,
+            email: req.body.email.trim(),
         })
         .then(user => {
             if (user.length > 1) {
@@ -96,7 +96,7 @@ exports.login = (req, res) => {
                     }
                     if (result) {
                         const token = jwt.sign({
-                            email: user.email,
+                            email: user.email.trim(),
                             userId: user._id
                         }, '412i34bkgi241ug34iu1g24iu21giuhbnh2v1i4', {
                             expiresIn: '1d'
