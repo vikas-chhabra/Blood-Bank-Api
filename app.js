@@ -7,7 +7,8 @@ const userRoutes = require('./routes/userRoutes');
 const bloodBankRoutes = require('./routes/bloodBankRoutes');
 const donorRoutes = require('./routes/donorRoutes');
 mongoose.connect('mongodb+srv://vikas:vikas@bloodbank-mbjfo.mongodb.net/test?retryWrites=true&w=majority', {
-        useNewUrlParser: true
+        useNewUrlParser: true,
+        useUnifiedTopology: true
     })
     .then(_ => console.log('Connection establishing with Mongo db successfully'))
     .catch(_ => console.log('Error while establishing connection with Mongo db'));
