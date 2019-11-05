@@ -6,7 +6,7 @@ const bodyParser = require('body-parser');
 const userRoutes = require('./routes/userRoutes');
 const bloodBankRoutes = require('./routes/bloodBankRoutes');
 const donorRoutes = require('./routes/donorRoutes');
-mongoose.connect('mongodb+srv://joravkumar:18199600Jk@@bg-db-cluster-mvrbg.mongodb.net/test?retryWrites=true', {
+mongoose.connect('mongodb+srv://vikas:vikas@bloodbank-mbjfo.mongodb.net/test?retryWrites=true&w=majority', {
         useNewUrlParser: true
     })
     .then(_ => console.log('Connection establishing with Mongo db successfully'))
